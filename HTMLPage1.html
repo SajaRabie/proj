@@ -1,0 +1,361 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="DataTables/datatables.min.css" rel="stylesheet" />
+    <script src="js/DataBase.js"></script>
+    <style>
+        body {
+            background-image: url('img/d6e7582175c1445682cac0e621aabce4.jpg');
+          
+        }
+      
+        .outer{
+            background:linear-gradient(#14ffe9,#ffeb3b,#ff00e0);
+
+        }
+        .button{
+            height:60px;
+            width:100px;
+            border-radius:50px;
+
+        }
+
+
+
+        .outer button, .outer span {
+           /* position: absolute;
+            top: 50%;
+            left: 70%;*/
+            transform: translate(-6%,-6%);
+
+        }
+        .outer button{
+            background:#111;
+            color:#f2f2f2;
+            outline:none;
+            border:none;
+            /*font-size:1px;*/
+            letter-spacing:1px;
+            text-transform:uppercase;
+            cursor:pointer;
+
+
+        }
+        .button button{
+
+            height:50px;
+            width:90px;
+            border-radius:50px;
+            margin-left:10px;
+            margin-top:7px;
+
+
+        }
+        .outer span{
+            height:100%;
+            width:100%;
+            background:inherit;
+        }
+        .button span{
+            border-radius:50%;
+        }
+        .outer:hover span:nth-child(1){
+            filter:blur(7px);
+        }
+        .outer:hover span:nth-child(2) {
+            filter: blur(14px);
+        }
+        .outer{
+            animation:rotate 1.5s linear infinite;
+        }
+        @keyframes rotate{
+            0%{
+                filter:hue-rotate(0deg);
+                
+            }
+            100%{
+                filter:hue-rotate(360deg);
+            }
+        }
+        .add {
+            font-size: 30px;
+            background: #111;
+           border-radius:50%;
+           width:10%;
+           height:10%;
+           margin-bottom:3%;
+        }
+        .btnadd {
+            background-image: url('d6e7582175c1445682cac0e621aabce4.jpg');
+        }
+
+        .btnadd2{
+            margin-top:10%;
+         
+           
+        }
+
+
+
+
+        
+
+
+
+
+
+
+
+    </style>
+    <title></title>
+
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <h1 class="text-warning">Latest Jobs . . .</h1>
+            <h3 class="text-white">Here are the best job opportunities in the world</h3>
+        </div>
+    </div>
+
+
+    <div class="container all bg-light mt-5 mb-5">
+
+        <div class="container mt-4 pt-4" id="container"><button onclick="add();" type="button" class="btn btn-dark rounded-pill w-100 fs-6 mb-5 border border-warning">+</button></div>
+        <div class="container" id="container">
+            <table id="example" class="display table bg-dark text-white" style="width:100%"></table>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade p-0" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog p-0">
+            <div class="modal-content p-0 btnadd">
+                <form method="get" action="" id="form1" name="formedit">
+                    <div class="container d-flex justify-content-center p-0 btnadd2">
+                        <div class="card rounded bg-secondary">
+                            <div class=" d-block justify-content-center">
+                                <div class="area1 p-4 py-2 mx-2"> </div>
+                                <div class="area2 p- text-center px-2">
+                                    <div class="image mr-3">
+                                        <img id="empAvatar" src="https://i.imgur.com/ZSkeqnd.jpg" class="rounded-circle" width="100" />
+                                        <h4 class=" name mt-3 " id="jobtitle">Job_title</h4>
+                                        <p class="information mt-3 text-justify">
+                                            I'm doing this as a way to practice my design skills,explore different styles and have fun.I'm fully aware this challenge doesn't pose my real problem to solve,That's why i'm looking for criticism and feedback ,not
+                                            just likes
+                                        </p>
+                                        <div class="row d-flex justify-content-center mt-5">
+                                            <p class="col-6 mt-3"><span class="h4 fw-bold">Contract by:</span> <input id="conrctby" class="form-control border border-danger rounded-pill mt-3" type="text" /></p>
+                                            <p class="col-6 mt-3"><span class="h4 fw-bold">Company:</span> <input id="company" class="form-control border border-warning rounded-pill mt-3" type="text" /></p>
+                                            <p class="col-6 mt-3"><span class="h4 fw-bold">Price:</span> <input id="price" class="form-control border border-warning rounded-pill mt-3" type="text" /></p>
+                                            <!--<p class="col-6 mt-3"><button id="save">save</button></p>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button id="save" type="button" class="btn btn-warning">Save</button>
+                        <button id="btnClose" type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+  
+    <div class="modal fade p-0" id="exampleModaladd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog p-0">
+            <div class="modal-content p-0 btnadd">
+
+                <div class="container d-flex justify-content-center p-0 btnadd2 ">
+                    <div class="card rounded bg-secondary">
+                        <div class=" d-block justify-content-center">
+                            <div class="area1 p-4 py-2 mx-2"> </div>
+                            <div class="area2 p- text-center px-2">
+                                <div class="image mr-3">
+                                    <div><h1 class="text-warning bg-dark p-4 border-top border-start border-3 border-danger">Add your Job..!!</h1></div>
+                                    <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-4 col-form-label">Jod_id</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control border border-danger rounded-pill" id="inputPassword">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-4 col-form-label">Job_title</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control border border-warning rounded-pill" id="inputPassword">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-4 col-form-label">Price</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control border border-danger rounded-pill" id="inputPassword">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-4 col-form-label">company</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control border border-warning rounded-pill" id="inputPassword">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-4 col-form-label">contract by</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control border border-danger rounded-pill" id="inputPassword">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="btnClose" type="button" class="btn btn-warning" data-bs-dismiss="modal">Save</button>
+                    <button id="btnClose" type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="DataTables/datatables.min.js"></script>
+    
+    <script>
+        t()
+
+        function t() {
+            $(document).ready(function () {
+                $('#example').DataTable({
+                    data: database,
+                    columns: [{
+                        title: 'Jod_id',
+                        data: 'Jod_id'
+                    }, {
+                        title: 'Job_title',
+                        data: 'Job_title'
+                    }, {
+                        title: 'Price',
+                        data: 'Price'
+                    }, {
+                        title: 'company',
+                        data: 'company'
+                    }, {
+                        title: 'contract_by',
+                        data: 'contract_by'
+                    }, {
+                        title: 'Delete',
+                        data: 'Jod_id',
+                        render: function (data, type, row) {
+
+
+                            return `<div class="outer button"><button type="button" class="btn btn-dark bttn1" onclick='deleterow(${data});'> Delete</button><span></span><span></span></div>`;
+                        }
+                    },
+
+                    {
+                        title: 'Edit',
+                        data: 'Jod_id',
+                        render: function (data, type, row) {
+
+
+                            return `<div class="outer button"><button type="button" class="btn btn-dark bttn1"onclick='editfunction(${data});'> Edit</button><span></span><span></span></div>`;
+                        }
+                    }
+
+                    ],
+                });
+            });
+        };
+    </script>
+
+
+    
+    <script>
+
+        var container = document.getElementById('container')
+        var save = document.getElementById('save')
+
+
+
+        function deleterow(id) {
+
+
+            for (var C = 0; C < database.length; C++) {
+                if (database[C].Jod_id == id) {
+                    database.splice(C, 1);
+
+                }
+            }
+            container.innerHTML = '';
+            container.innerHTML = `<table id="example" class="display table table-striped table-hover" style="width:100%"></table >`
+
+            t()
+
+        }
+
+
+
+        var empTitle = document.getElementById('jobtitle');
+        var empDept = document.getElementById('conrctby');
+        var empEmail = document.getElementById('company');
+        var empPhone = document.getElementById('price');
+
+        function editfunction(id) {
+            var modal = document.getElementById('exampleModal');
+            var myModal = new bootstrap.Modal(modal, {
+                keyboard: true
+            });
+
+            var emplo = database.filter(function (element) {
+                return element.Jod_id == id;
+            });
+            empTitle.textContent = emplo[0].Job_title;
+            empEmail.value = emplo[0].company;
+            empPhone.value = emplo[0].Price;
+            empDept.value = emplo[0].contract_by;
+
+            var a = database.indexOf(emplo[0]);
+            //alert(a)
+            save.addEventListener('click', () => {
+                database[a].company = empEmail.value;
+                database[a].Price = empPhone.value;
+                database[a].contract_by = empDept.value;
+
+                container.innerHTML = '';
+                container.innerHTML = `<table id="example" class="display table table-striped table-hover" style="width:100%"></table >`
+                t()
+            })
+
+
+
+            myModal.show(true);
+        }
+        function add() {
+            /*alert("jj");*/
+            var modal = document.getElementById('exampleModaladd');
+            var myModal = new bootstrap.Modal(modal, {
+                keyboard: true
+            });
+
+
+
+            myModal.show(true);
+
+
+        };
+
+    </script>
+
+</body>
+</html>
